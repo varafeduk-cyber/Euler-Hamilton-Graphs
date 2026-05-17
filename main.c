@@ -29,6 +29,7 @@ int main(int argc, char* argv[]){
         }
         
         my_graph = create_graph(nodes);
+        generate_hamilton_graph(my_graph, saturation);
 
     } else if(strcmp(argv[1], "--non-hamilton") == 0){
         printf("nodes> ");
@@ -39,6 +40,7 @@ int main(int argc, char* argv[]){
         saturation = 50;
 
         my_graph = create_graph(nodes);
+        generate_non_hamilton_graph(my_graph, saturation);
 
     } else {
         printf("Error: Unknown argument '%s'\n", argv[1]);
