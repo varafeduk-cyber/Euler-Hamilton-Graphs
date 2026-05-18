@@ -62,3 +62,53 @@ void find_euler_cycle(Graph* g){
     free(stack);
     free(result);
 }
+
+int hamilton_backtrack(Graph* g, int* path, int* visited, int pos){
+    int n = g->nodes;
+
+    if(pos == n){
+        if(g->matrix[path[pos - 1]][path[0]] == 1){
+            return 1;
+        }
+        return 0;
+    }
+
+    for(int v = 1; v < n; v++){
+        if(g->matrix[path[pos-1]][v] == 1 && !visited[v]){
+            path[pos] = v;
+            visited[v] = 1;
+
+            if(hamilton_backtrack(g, path, visited, pos + 1)){
+                return 1;
+            }
+//jesli nie priwelo k reszeniu szag nazad
+            visited[v] = 0;
+            path[pos] = -1;
+        }
+    }
+    return 0;
+}
+
+void find_hamilton_cycle(Graph* g){
+    int n = g->nodes;
+
+    int* path = (int*)malloc(n * sizeof(int));
+    int* visited = (int*)calloc(n, sizeof(int));
+
+    for(int i = 0; i < n; i++) path[i] = -1;
+
+    path[0] = 0;
+    visited[0] = 1;
+
+    if(hamilton_backtrack(g, path, visited, 1)){
+        printf("Hamilton cycle: ");
+        for(int i = 0; i < n; i++){
+            printf("%d -> ", path[i] + 1);
+        }
+        printf("%d\n", path[0] + 1);
+    } else{
+        printf("No Hamilton cycle found in this graph.\n");
+    }
+    free(path);
+    free(visited);
+}

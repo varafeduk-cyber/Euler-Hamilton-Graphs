@@ -58,10 +58,12 @@ int main(int argc, char* argv[]){
             print_graph(my_graph); 
         } else if(strcmp(action, "euler") == 0){
             find_euler_cycle(my_graph);
-        } else if(strcmp(action, "exit") == 0){
+        } else if(strcmp(action, "hamilton") == 0){
+            find_hamilton_cycle(my_graph);
+        }else if(strcmp(action, "exit") == 0){
         break;
         } else {
-            printf("Unknown action! Try 'print' or 'exit'.\n");
+            printf("Unknown action! Try 'print', 'euler', 'hamilton' or 'exit'.\n");
         }
     } 
 
