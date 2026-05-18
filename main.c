@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "graph.h"
+#include "algorithms.h"
 
 int main(int argc, char* argv[]){
     if(argc < 2){
@@ -54,9 +55,10 @@ int main(int argc, char* argv[]){
         printf("action> ");
         if(scanf(" %99[^\n]",action) == EOF) break;
         if(strcmp(action, "print") == 0){
-            print_graph(my_graph);
-            
-        }else if(strcmp(action, "exit") == 0){
+            print_graph(my_graph); 
+        } else if(strcmp(action, "euler") == 0){
+            find_euler_cycle(my_graph);
+        } else if(strcmp(action, "exit") == 0){
         break;
         } else {
             printf("Unknown action! Try 'print' or 'exit'.\n");
